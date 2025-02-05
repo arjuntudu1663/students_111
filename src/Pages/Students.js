@@ -7,6 +7,8 @@ import { MdDelete } from "react-icons/md";
 import { db } from '../firebase';
 import { collection,addDoc,getDocs,deleteDoc,doc } from 'firebase/firestore';
 
+const apiKey = process.env.key;
+
 const Students = () => { 
     
     function createData(id,name, className, section, rollNo,action) {
@@ -135,7 +137,7 @@ const Students = () => {
                                           </TableCell>
                                           <TableCell >
                                                <div style={{width:"50%",display:"flex",justifyContent:"space-around"}}>
-                                               <Button><LiaEyeSolid size={30}/></Button> 
+                                               <Button><LiaEyeSolid onClick={e=>console.log(apiKey)} size={30}/></Button> 
                                                <Button><FaPen size={20} color='green'/></Button>
                                                <Button><MdDelete onClick={e=>deleteVal(x.oid)} size={30} color='red'/></Button>
                                              
