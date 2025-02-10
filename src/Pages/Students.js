@@ -5,11 +5,11 @@ import { LiaEyeSolid } from "react-icons/lia";
 import { FaPen } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { db } from '../firebase';
-import { collection,addDoc,getDocs,deleteDoc,doc } from 'firebase/firestore';
+import { collection,addDoc,getDocs,deleteDoc,doc, setDoc } from 'firebase/firestore';
 
 const apiKey = process.env.key;
 
-const Students = () => { 
+const Students = ({setDrawerFlag}) => { 
     
     function createData(id,name, className, section, rollNo,action) {
         return { id, name, className, section, rollNo,action};
@@ -51,7 +51,7 @@ const Students = () => {
 
          }
 
-         window.location.reload()
+          
     }
 
     const getStudents = async function(){
@@ -72,11 +72,11 @@ const Students = () => {
   return (
     <div style={{width:"100%",display:"grid",placeItems:"center"}} >
          
-         <div style={{width:"80%",marginTop:"50px"}}>
-               
-               <div style={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+         <div style={{width:"80%",marginTop:"150px"}}>
+              
+               <div style={{width:"100%",display:"flex",justifyContent:"space-between",marginBottom:"100px"}}>
                      
-                     <div></div>
+                     <div> {localStorage.getItem("user")?<Button variant='outlined' color='success' onClick={e=>setDrawerFlag(true)}>Menu</Button>:<></>}</div>
                      <Button onClick={e=>setModalFlag(true)} variant='contained' color='success' >Add Student + </Button>
 
                </div>
@@ -133,7 +133,7 @@ const Students = () => {
                                           </TableCell>
 
                                           <TableCell>
-                                             {x.rollNo}
+                                             {x.roll_no}
                                           </TableCell>
                                           <TableCell >
                                                <div style={{width:"50%",display:"flex",justifyContent:"space-around"}}>

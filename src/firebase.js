@@ -2,10 +2,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup,signOut } from "firebase/auth";
 import {getFirestore} from 'firebase/firestore'
-const key = process.env.key
+import env from 'react-dotenv'
+
+
+
+
 // Replace this with your Firebase config
 const firebaseConfig = {
-    apiKey:   `${key}`,
+    apiKey:"AIzaSyAQujmZETZpI19jZRmp-mcJtJvnCqTd3yI",
     authDomain: "app1-9bb9b.firebaseapp.com",
     projectId: "app1-9bb9b",
     storageBucket: "app1-9bb9b.firebasestorage.app",

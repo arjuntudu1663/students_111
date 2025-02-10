@@ -10,21 +10,25 @@ const Home = () => {
   const [drawerFlag,setDrawerFlag] = useState(false)
   const navigate = useNavigate()
   
-  const [flag,setFlag] = useState("students")
+  const [flag,setFlag] = useState(localStorage.getItem("user")?"dashboard":"login")
   let element ; 
 
   switch(flag){
 
-    case "dashboard":
-        element = <Dashboard/>
     case "students":
-        element = <Students/>
+        element = <Students setDrawerFlag = {setDrawerFlag}  />
+        break;
+    case "login":
+        element = <Login setDrawerFlag = {setDrawerFlag} />
+        break;
+    case "dashboard":
+        element = <Dashboard setDrawerFlag = {setDrawerFlag} />
   }
 
    useEffect(()=>{
          
           if(!localStorage.getItem("user")){
-              navigate("/")
+               setFlag("login")
           }
   
       },[])
@@ -32,7 +36,7 @@ const Home = () => {
   return (
     <div>
 
-        <Button onClick={e=>setDrawerFlag(true)} >open</Button>
+        
         <Drawer  open = {drawerFlag} style={{display:"flex",flexDirection:"column",justifyContent:"space-around",padding:"30px"}}>
 
             
@@ -44,15 +48,21 @@ const Home = () => {
                     </div>
                    
                     <List style={{width:"300px",marginTop:"30%",padding:"10px"}}>
-                        
-                         <ListItem>
+
+                        <ListItem>
                            <ListItemButton onClick={e=>setFlag("dashboard")} >
                                <p>Dashboard</p>
                            </ListItemButton>
                          </ListItem>
+                        
                          <ListItem>
                            <ListItemButton onClick={e=>setFlag("students")} >
                                <p>Students</p>
+                           </ListItemButton>
+                         </ListItem>
+                         <ListItem>
+                           <ListItemButton onClick={e=>setFlag("login")} >
+                               <p>Login</p>
                            </ListItemButton>
                          </ListItem>
                       
